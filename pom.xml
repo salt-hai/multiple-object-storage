@@ -5,34 +5,34 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>com.hengtacc</groupId>
-		<artifactId>hengtacc-object-storage-dependencies</artifactId>
+		<groupId>salthai.top</groupId>
+		<artifactId>multiple-object-storage-dependencies</artifactId>
 		<version>${revision}</version>
-		<relativePath>hengtacc-object-storage-dependencies/pom.xml</relativePath>
+		<relativePath>multiple-object-storage-dependencies/pom.xml</relativePath>
 	</parent>
-	<artifactId>hengtacc-object-storage</artifactId>
+	<artifactId>multiple-object-storage</artifactId>
 	<version>${revision}</version>
 	<packaging>pom</packaging>
-	<name>hengtacc-object-storage</name>
+	<name>multiple-object-storage</name>
 	<description>通用对象存储</description>
 
 	<modules>
 		<!--依赖管理-->
-		<module>hengtacc-object-storage-dependencies</module>
+		<module>multiple-object-storage-dependencies</module>
 		<!--公共代码-->
-		<module>core/object-storage-core</module>
+		<module>core/multiple-object-storage-core</module>
 		<!--自动配置-->
-		<module>autoconfigure/object-storage-autoconfigure</module>
+		<module>autoconfigure/multiple-object-storage-autoconfigure</module>
 		<!--供应商-->
-		<module>provider/object-storage-provider-aliyun-sdk</module>
-		<module>provider/object-storage-provider-huawei-sdk</module>
-		<module>provider/object-storage-provider-baidu-sdk</module>
-		<module>provider/object-storage-provider-amazon-sdk</module>
+		<module>provider/multiple-object-storage-provider-aliyun-sdk</module>
+		<module>provider/multiple-object-storage-provider-huawei-sdk</module>
+		<module>provider/multiple-object-storage-provider-baidu-sdk</module>
+		<module>provider/multiple-object-storage-provider-amazon-sdk</module>
 		<!--启动器-->
-		<module>starter/object-storage-spring-boot-starter</module>
-		<module>starter/object-storage-oss-spring-boot-starter</module>
-		<module>starter/object-storage-obs-spring-boot-starter</module>
-		<module>starter/object-storage-bos-spring-boot-starter</module>
+		<module>starter/multiple-object-storage-spring-boot-starter</module>
+		<module>starter/multiple-object-storage-oss-spring-boot-starter</module>
+		<module>starter/multiple-object-storage-obs-spring-boot-starter</module>
+		<module>starter/multiple-object-storage-bos-spring-boot-starter</module>
 	</modules>
 
 	<properties>

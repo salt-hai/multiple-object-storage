@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>salthai.top</groupId>
+		<artifactId>multiple-object-storage</artifactId>
+		<version>${revision}</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>multiple-object-storage-obs-spring-boot-starter</artifactId>
+	<description>obs-启动器</description>
+	<dependencies>
+		<!--spring 配置解析-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+		</dependency>
+		<!--自动配置文件解析-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-autoconfigure-processor</artifactId>
+		</dependency>
+		<!--项目自动配置-->
+		<dependency>
+			<groupId>salthai.top</groupId>
+			<artifactId>multiple-object-storage-autoconfigure</artifactId>
+		</dependency>
+		<!--obs接口实现-->
+		<dependency>
+			<groupId>salthai.top</groupId>
+			<artifactId>multiple-object-storage-provider-huawei-sdk</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>

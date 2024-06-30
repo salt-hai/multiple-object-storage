@@ -5,10 +5,14 @@
 **目前提供的功能模块列表**
 
 ```
-|-- hengtacc-object-storage-dependencies    -- 项目本身各子模块的依赖管理，以及第三方模块的依赖管理
+|-- multiple-object-storage-dependencies   -- 项目本身各子模块的依赖管理，以及第三方模块的依赖管理
 ```
 
 ## 使用方法
+
+***依赖说明***
+
+项目相应依赖暂未推送中央仓库,需要自行克隆代码,本地编译
 
 ***聚合使用***
 
@@ -22,8 +26,8 @@
 <dependencyManagement>
      <dependencies>
         <dependency>
-            <groupId>com.hengtacc</groupId>
-            <artifactId>hengtacc-object-storage-dependencies</artifactId>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-dependencies</artifactId>
             <version>0.1</version>
             <type>pom</type>
             <scope>import</scope>
@@ -37,31 +41,31 @@
 ``` xml
     <!--spring-boot 启动依赖-->
         <dependency>
-            <groupId>com.hengtacc</groupId>
-            <artifactId>object-storage-spring-boot-starter</artifactId>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-spring-boot-starter</artifactId>
         </dependency>
         <!--供应商实现-->
         <!--oss-->
         <dependency>
-            <groupId>com.hengtacc</groupId>
-            <artifactId>object-storage-provider-aliyun-sdk</artifactId>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-provider-aliyun-sdk</artifactId>
         </dependency>
         <!--obs-->
         <dependency>
-            <groupId>com.hengtacc</groupId>
-            <artifactId>object-storage-provider-huawei-sdk</artifactId>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-provider-huawei-sdk</artifactId>
         </dependency>
         <!--bos-->
         <dependency>
-            <groupId>com.hengtacc</groupId>
-            <artifactId>object-storage-provider-baidu-sdk</artifactId>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-provider-baidu-sdk</artifactId>
         </dependency>
 ```
 
 配置文件
 
 ```yaml
-hengtacc:
+multiple:
   object:
     storage:
       pool:
@@ -98,15 +102,15 @@ hengtacc:
 
 ``` xml
 <dependency>
-        <groupId>com.hengtacc</groupId>
-        <artifactId>object-storage-oss-autoconfigure</artifactId>
+        <groupId>salthai.top</groupId>
+        <artifactId>multiple-object-storage-oss-autoconfigure</artifactId>
 </dependency>
 ```
 
 配置文件
 
 ```yaml
-hengtacc:
+multiple:
   object:
     aliyun:
       #  该配置是否启用该项目

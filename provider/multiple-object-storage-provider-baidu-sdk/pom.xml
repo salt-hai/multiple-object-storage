@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>salthai.top</groupId>
+		<artifactId>multiple-object-storage</artifactId>
+		<version>${revision}</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>multiple-object-storage-provider-baidu-sdk</artifactId>
+	<description>百度bos</description>
+	<dependencies>
+		<!--spring 上下文环境 可选,用于自动配置时spring-bean扫描-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>salthai.top</groupId>
+			<artifactId>multiple-object-storage-core</artifactId>
+		</dependency>
+		<!--百度 bos-->
+		<dependency>
+			<groupId>com.baidubce</groupId>
+			<artifactId>bce-java-sdk</artifactId>
+		</dependency>
+	</dependencies>
+
+</project>
