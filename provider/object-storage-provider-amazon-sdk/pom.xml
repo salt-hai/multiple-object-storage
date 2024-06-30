@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.hengtacc</groupId>
+		<artifactId>hengtacc-object-storage</artifactId>
+		<version>${revision}</version>
+		<relativePath>../../pom.xml</relativePath>
+	</parent>
+
+	<artifactId>object-storage-provider-amazon-sdk</artifactId>
+	<dependencies>
+		<!--spring 上下文环境 可选,用于自动配置时spring-bean扫描-->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<!--项目通用部分-->
+		<dependency>
+			<groupId>com.hengtacc</groupId>
+			<artifactId>object-storage-core</artifactId>
+		</dependency>
+		<!--sdk-->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>apache-client</artifactId>
+		</dependency>
+		<!--S3 高级传输特性-->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>s3-transfer-manager</artifactId>
+		</dependency>
+		<!--配置基于 Netty 的 HTTP 客户端 用于高级传输 -->
+		<dependency>
+			<groupId>software.amazon.awssdk</groupId>
+			<artifactId>netty-nio-client</artifactId>
+		</dependency>
+		<!--配置基于 Netty 的 HTTP 客户端 用于高级传输 -->
+	</dependencies>
+</project>
