@@ -1,6 +1,7 @@
 package salthai.top.object.storage.autoconfigure.oss;
 
 import com.aliyun.oss.OSS;
+import jakarta.annotation.PostConstruct;
 import salthai.top.object.storage.aliyun.operations.OssBucketOperations;
 import salthai.top.object.storage.aliyun.operations.OssObjectMultipartOperations;
 import salthai.top.object.storage.aliyun.operations.OssObjectOperations;
@@ -15,8 +16,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 阿里云的配置

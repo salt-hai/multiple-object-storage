@@ -3,6 +3,7 @@ package salthai.top.object.storage.autoconfigure.bos;
 import com.baidubce.Protocol;
 import com.baidubce.auth.DefaultBceCredentials;
 import com.baidubce.services.bos.BosClient;
+import jakarta.annotation.PostConstruct;
 import salthai.top.object.storage.autoconfigure.ProviderClientConfiguration;
 import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
 import salthai.top.object.storage.baidu.client.BosClientFactory;
@@ -21,8 +22,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
 
 /**
  * bos 客户端配置

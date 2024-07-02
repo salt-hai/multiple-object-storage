@@ -1,6 +1,7 @@
 package salthai.top.object.storage.autoconfigure.bos;
 
 import com.baidubce.services.bos.BosClient;
+import jakarta.annotation.PostConstruct;
 import salthai.top.object.storage.autoconfigure.ProviderCondition;
 import salthai.top.object.storage.baidu.operations.BosBucketOperations;
 import salthai.top.object.storage.baidu.operations.BosObjectMultipartOperations;
@@ -18,8 +19,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 百度 bos 自动配置

@@ -3,6 +3,7 @@ package salthai.top.object.storage.autoconfigure.obs;
 import com.obs.services.ObsClient;
 import com.obs.services.ObsConfiguration;
 import com.obs.services.model.HttpProtocolTypeEnum;
+import jakarta.annotation.PostConstruct;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -20,8 +21,6 @@ import salthai.top.object.storage.core.provider.ProviderClientManager;
 import salthai.top.object.storage.core.provider.factory.ProviderClientFactory;
 import salthai.top.object.storage.huawei.client.ObsClientFactory;
 import salthai.top.object.storage.huawei.config.HuaWeiObsProperties;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 华为obs客户端

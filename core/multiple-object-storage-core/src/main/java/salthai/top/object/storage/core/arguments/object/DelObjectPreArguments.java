@@ -1,9 +1,8 @@
 package salthai.top.object.storage.core.arguments.object;
 
 import cn.hutool.core.lang.Assert;
+import jakarta.validation.constraints.NotBlank;
 import salthai.top.object.storage.core.model.arguments.ObjectStorageArguments;
-
-import javax.validation.constraints.NotBlank;
 
 /**
  * 预删除参数

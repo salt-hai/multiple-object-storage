@@ -1,5 +1,6 @@
 package salthai.top.object.storage.autoconfigure.obs;
 
+import jakarta.annotation.PostConstruct;
 import salthai.top.object.storage.autoconfigure.ProviderCondition;
 import salthai.top.object.storage.core.operations.ObjectOperations;
 import salthai.top.object.storage.core.provider.ProviderClientManager;
@@ -16,8 +17,6 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import javax.annotation.PostConstruct;
 
 /**
  * obs 配置

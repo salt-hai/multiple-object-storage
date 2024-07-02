@@ -3,6 +3,7 @@ package salthai.top.object.storage.autoconfigure.oss;
 import com.aliyun.oss.ClientBuilderConfiguration;
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.common.comm.Protocol;
+import jakarta.annotation.PostConstruct;
 import salthai.top.object.storage.aliyun.client.OssClientFactory;
 import salthai.top.object.storage.aliyun.config.AliYunOssProperties;
 import salthai.top.object.storage.autoconfigure.ProviderClientConfiguration;
@@ -20,8 +21,6 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import javax.annotation.PostConstruct;
 
 /**
  * 阿里云客户端配置

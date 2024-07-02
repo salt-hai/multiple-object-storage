@@ -1,8 +1,8 @@
 package salthai.top.object.storage.core.arguments.object;
 
+import jakarta.validation.constraints.NotEmpty;
 import salthai.top.object.storage.core.arguments.base.BucketArguments;
 
-import javax.validation.constraints.NotEmpty;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;

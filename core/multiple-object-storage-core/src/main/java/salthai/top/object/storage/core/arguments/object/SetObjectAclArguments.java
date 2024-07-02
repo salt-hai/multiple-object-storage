@@ -1,9 +1,9 @@
 package salthai.top.object.storage.core.arguments.object;
 
+import jakarta.validation.constraints.NotNull;
 import salthai.top.object.storage.core.acl.AccessControlList;
 import salthai.top.object.storage.core.arguments.base.ObjectVersionArguments;
 
-import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 /**
