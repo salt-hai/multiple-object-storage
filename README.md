@@ -18,7 +18,7 @@
 
 聚合使用可以支持多个不同的云服务商进行切换,按照项目导入的依赖或导入多个实现依赖后指定想要的服务商,系统会更具配置文件或依赖项目进行自动配置
 
-首先项目pom文件引入:
+#### 首先项目pom文件引入:
 
 引入bom依赖进行管理,spring-boot 3.0 以下使用版本号3.0以下的最新版本即可
 
@@ -119,4 +119,45 @@ multiple:
       access-key: oss-ak
       endpoint: oss-接入点
 ```
+### 调用Api进行操作:
 
+下面是一个示例,更多使用方式,请看这些类 ObjectOperations,BucketOperation,ObjectMultipartOperations Javadoc
+
+```java
+/**
+ * 测试
+ * @author Kuang HaiBo
+ * 2024/5/15 15:57
+ */
+@Slf4j
+@RunWith(SpringRunner.class)
+@SpringBootTest
+public class ObjectStorageOperaTest {
+    @Autowired
+    private ObjectOperations objectOperations;
+
+    static final String bucketName = "you-bucket";
+
+    @Test
+    public void uploadAnyFile() {
+        // url file
+        URL urlFile = new URL("file-url");
+        PutObjectDomain putUrlFileResult = objectOperations.putObject(bucketName, FileWrappers.wrapper(urlFile), "url-file.txt");
+        Assert.assertNotNull(putUrlFileResult);
+        // InputStream file
+        Path localFilPath = Path.of("you file path");
+        try (InputStream streamFile = Files.newInputStream(localFilPath)) {
+            PutObjectDomain result = objectOperations.putObject(bucketName, FileWrappers.wrapper(streamFile), "streamFile-wx.png");
+            Assert.assertNotNull(result);
+        }
+        // local file
+        File localFile = localFilPath.toFile();
+        PutObjectDomain result = objectOperations.putObject(bucketName, FileWrappers.wrapper(localFile), "localFile-wx.png");
+        Assert.assertNotNull(result);
+        // byte file
+        byte[] bytesFile = FileUtil.readBytes(localFile);
+        PutObjectDomain bytesFilePutResult = objectOperations.putObject(bucketName, FileWrappers.wrapper(bytesFile), "bytesFile-wx.png");
+        Assert.assertNotNull(bytesFilePutResult);
+    }
+}
+```

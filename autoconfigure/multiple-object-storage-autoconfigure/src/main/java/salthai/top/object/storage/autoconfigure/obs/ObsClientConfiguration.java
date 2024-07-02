@@ -1,14 +1,5 @@
 package salthai.top.object.storage.autoconfigure.obs;
 
-import salthai.top.object.storage.autoconfigure.ProviderClientConfiguration;
-import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
-import salthai.top.object.storage.core.constants.StorageConstants;
-import salthai.top.object.storage.core.provider.DefaultProviderClientPoolingManager;
-import salthai.top.object.storage.core.provider.DefaultProviderClientSingletonManager;
-import salthai.top.object.storage.core.provider.ProviderClientManager;
-import salthai.top.object.storage.core.provider.factory.ProviderClientFactory;
-import salthai.top.object.storage.huawei.client.ObsClientFactory;
-import salthai.top.object.storage.huawei.config.HuaWeiObsProperties;
 import com.obs.services.ObsClient;
 import com.obs.services.ObsConfiguration;
 import com.obs.services.model.HttpProtocolTypeEnum;
@@ -20,6 +11,15 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import salthai.top.object.storage.autoconfigure.ProviderClientConfiguration;
+import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
+import salthai.top.object.storage.core.constants.StorageConstants;
+import salthai.top.object.storage.core.provider.DefaultProviderClientPoolingManager;
+import salthai.top.object.storage.core.provider.DefaultProviderClientSingletonManager;
+import salthai.top.object.storage.core.provider.ProviderClientManager;
+import salthai.top.object.storage.core.provider.factory.ProviderClientFactory;
+import salthai.top.object.storage.huawei.client.ObsClientFactory;
+import salthai.top.object.storage.huawei.config.HuaWeiObsProperties;
 
 import javax.annotation.PostConstruct;
 
@@ -92,6 +92,7 @@ class ObsClientConfiguration extends ProviderClientConfiguration {
 	 * @param emptyConfig 空配置
 	 */
 	private void applyProperties(HuaWeiObsProperties properties, ObsConfiguration emptyConfig) {
+		emptyConfig.setPathStyle(properties.getPathStyle());
 		emptyConfig.setEndPoint(properties.getEndpoint());
 		emptyConfig.setHttpProtocolType(isEnableHttps() ? HttpProtocolTypeEnum.HTTP2_0 : HttpProtocolTypeEnum.HTTP1_1);
 	}
