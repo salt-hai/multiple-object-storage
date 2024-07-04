@@ -69,14 +69,14 @@ multiple:
   object:
     storage:
       pool:
-        # 对象池管理供应商客户端,是否启用,如果 “commons-pool2” 可用，则自动启用。
+        # 使用对象池管理供应商客户端,如果 “commons-pool2” 可用，则自动启用。也可禁用对象池,禁用时供应商客户端使用单例管理
         enabled: true
         max-idle: 8
         min-idle: 0
         max-active: 8
         max-wait: -1ms
         time-between-eviction-runs: -1ms
-      #  该配置是否启用该项目
+      #  是否启用该项目
       enable: true
       # 多个依赖时指定使用的供应商,只有单个供应商实现依赖不需要指定
       provider: baidu
@@ -112,12 +112,21 @@ multiple:
 ```yaml
 multiple:
   object:
-    aliyun:
-      #  该配置是否启用该项目
+    storage:
+      pool:
+        # 使用对象池管理供应商客户端,如果 “commons-pool2” 可用，则自动启用。也可禁用对象池,禁用时供应商客户端使用单例管理
+        enabled: true
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1ms
+        time-between-eviction-runs: -1ms
+      #  是否启用该项目
       enable: true
-      secret-key: oss-sk
-      access-key: oss-ak
-      endpoint: oss-接入点
+      aliyun:
+       secret-key: oss-sk
+       access-key: oss-ak
+       endpoint: oss-接入点
 ```
 ### 调用Api进行操作:
 
