@@ -4,6 +4,14 @@ import com.baidubce.Protocol;
 import com.baidubce.auth.DefaultBceCredentials;
 import com.baidubce.services.bos.BosClient;
 import jakarta.annotation.PostConstruct;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import salthai.top.object.storage.autoconfigure.ProviderClientConfiguration;
 import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
 import salthai.top.object.storage.baidu.client.BosClientFactory;
@@ -14,14 +22,6 @@ import salthai.top.object.storage.core.provider.DefaultProviderClientPoolingMana
 import salthai.top.object.storage.core.provider.DefaultProviderClientSingletonManager;
 import salthai.top.object.storage.core.provider.ProviderClientManager;
 import salthai.top.object.storage.core.provider.factory.ProviderClientFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.ObjectProvider;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
-import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 /**
  * bos 客户端配置
@@ -97,8 +97,7 @@ class BosClientConfiguration extends ProviderClientConfiguration {
 			com.baidubce.services.bos.BosClientConfiguration configuration) {
 		configuration.setCredentials(new DefaultBceCredentials(properties.getAccessKey(), properties.getSecretKey()));
 		configuration.setEndpoint(properties.getEndpoint());
-		configuration.setPathStyleAccessEnable(properties.getPathStyleAccessEnable());
-		configuration.setEnableHttpAsyncPut(properties.getEnableHttpAsyncPut());
+		configuration.setPathStyleAccessEnable(isPathStyleAccessEnable());
 		configuration.setProtocol(isEnableHttps() ? Protocol.HTTPS : Protocol.HTTP);
 	}
 
