@@ -92,7 +92,7 @@ class ObsClientConfiguration extends ProviderClientConfiguration {
 	 * @param emptyConfig 空配置
 	 */
 	private void applyProperties(HuaWeiObsProperties properties, ObsConfiguration emptyConfig) {
-		emptyConfig.setPathStyle(properties.getPathStyle());
+		emptyConfig.setPathStyle(isPathStyleAccessEnable());
 		emptyConfig.setEndPoint(properties.getEndpoint());
 		emptyConfig.setHttpProtocolType(isEnableHttps() ? HttpProtocolTypeEnum.HTTP2_0 : HttpProtocolTypeEnum.HTTP1_1);
 	}

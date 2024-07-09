@@ -1,8 +1,8 @@
 package salthai.top.object.storage.autoconfigure;
 
-import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
 import org.apache.commons.pool2.impl.GenericObjectPoolConfig;
 import org.springframework.util.ClassUtils;
+import salthai.top.object.storage.autoconfigure.properties.ObjectStorageProperties;
 
 /**
  * 供应商客户端配置,用于继承，提供一些通用方法,
@@ -34,10 +34,15 @@ public abstract class ProviderClientConfiguration {
 	 * @return true 启用
 	 */
 	protected boolean isEnableHttps() {
-		if (objectStorageProperties.haveHttpProtocolConfig()) {
-			return false;
-		}
-		return objectStorageProperties.isEnableHttps();
+		return objectStorageProperties.isHttpsEnable();
+	}
+
+	/**
+	 * 启用路径样式访问
+	 * @return true:开启
+	 */
+	protected boolean isPathStyleAccessEnable() {
+		return objectStorageProperties.isPathStyleAccessEnable();
 	}
 
 	/**

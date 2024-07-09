@@ -1,9 +1,9 @@
 package salthai.top.object.storage.autoconfigure.properties;
 
-import salthai.top.object.storage.core.constants.StorageConstants;
-import salthai.top.object.storage.core.enums.Provider;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import salthai.top.object.storage.autoconfigure.oss.OssClientConfigurationCustomizer;
+import salthai.top.object.storage.core.constants.StorageConstants;
+import salthai.top.object.storage.core.enums.Provider;
 
 import java.time.Duration;
 import java.util.Objects;
@@ -32,6 +32,17 @@ public class ObjectStorageProperties {
 	 * </p>
 	 */
 	private Boolean enableHttps;
+
+	/**
+	 * 启用路径样式访问
+	 * <p>
+	 * 大部分对象存储服务都可以参考 <a href=
+	 * "https://docs.aws.amazon.com/AmazonS3/latest/userguide/VirtualHosting.html">aws s3
+	 * </a>
+	 * </p>
+	 *
+	 */
+	private Boolean pathStyleAccessEnabled;
 
 	/**
 	 * 供应商 没有默认值，
@@ -67,7 +78,15 @@ public class ObjectStorageProperties {
 		this.enableHttps = enableHttps;
 	}
 
-	public boolean isEnableHttps() {
+	public void setPathStyleAccess(Boolean pathStyleAccessEnabled) {
+		this.pathStyleAccessEnabled = pathStyleAccessEnabled;
+	}
+
+	/**
+	 * 开启 http 配置
+	 * @return true:开启
+	 */
+	public boolean isHttpsEnable() {
 		if (Objects.isNull(enableHttps)) {
 			return false;
 		}
@@ -75,11 +94,14 @@ public class ObjectStorageProperties {
 	}
 
 	/**
-	 * 存有 http协议配置
-	 * @return true: 存在
+	 * 启用路径样式访问
+	 * @return true:开启
 	 */
-	public boolean haveHttpProtocolConfig() {
-		return Objects.nonNull(enableHttps);
+	public Boolean isPathStyleAccessEnable() {
+		if (Objects.isNull(pathStyleAccessEnabled)) {
+			return false;
+		}
+		return pathStyleAccessEnabled;
 	}
 
 	/**
@@ -188,7 +210,9 @@ public class ObjectStorageProperties {
 
 	@Override
 	public String toString() {
-		return "ObjectStorageProperties{" + "enable=" + enable + ", provider=" + provider + ", pool=" + pool + '}';
+		return "ObjectStorageProperties{" + "enable=" + enable + ", enableHttps=" + enableHttps
+				+ ", pathStyleAccessEnabled=" + pathStyleAccessEnabled + ", provider=" + provider + ", pool=" + pool
+				+ '}';
 	}
 
 }

@@ -75,27 +75,6 @@
 					</plugin>
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
-						<artifactId>maven-javadoc-plugin</artifactId>
-						<configuration>
-							<additionalJOption>-J-Dfile.encoding=UTF-8</additionalJOption>
-							<doclint>none</doclint>
-							<tags>
-								<tag>
-									<name>date</name>
-								</tag>
-							</tags>
-						</configuration>
-						<executions>
-							<execution>
-								<goals>
-									<goal>jar</goal>
-								</goals>
-								<id>attach-javadocs</id>
-							</execution>
-						</executions>
-					</plugin>
-					<plugin>
-						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-release-plugin</artifactId>
 						<configuration>
 							<autoVersionSubmodules>true</autoVersionSubmodules>
@@ -145,6 +124,27 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<additionalJOption>-J-Dfile.encoding=UTF-8</additionalJOption>
+					<doclint>none</doclint>
+					<tags>
+						<tag>
+							<name>date</name>
+						</tag>
+					</tags>
+				</configuration>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+						<id>attach-javadocs</id>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>io.spring.javaformat</groupId>
 				<artifactId>spring-javaformat-maven-plugin</artifactId>
