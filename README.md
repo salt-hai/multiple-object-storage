@@ -2,6 +2,7 @@
 
 ## ⚠
 本项目含Hutool,该开源工具已被公司收购,介于该公司的恶劣行为[详情](https://github.com/AlistGo/alist/issues/8649) 后续将移除该工具
+
 **Object-Storage** 提供方便快捷的对象存储操作
 
 **[Wiki](https://deepwiki.com/salt-hai/multiple-object-storage)**
