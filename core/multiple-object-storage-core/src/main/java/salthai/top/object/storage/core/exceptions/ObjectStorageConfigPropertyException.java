@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.exceptions;
 
-import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.core.diagnostics.FailureAnalysisWraps;
 
 /**
@@ -72,7 +72,7 @@ public class ObjectStorageConfigPropertyException extends ObjectStorageException
 	 * @param propertiesValue 属性值
 	 */
 	public static void assertNotBlank(String propertiesName, String propertiesValue) {
-		if (StrUtil.isBlank(propertiesValue)) {
+		if (StringUtils.isBlank(propertiesValue)) {
 			throw new ObjectStorageConfigPropertyException(propertiesName, "cant be null or empty");
 		}
 	}
@@ -92,7 +92,7 @@ public class ObjectStorageConfigPropertyException extends ObjectStorageException
 	 */
 	@Override
 	public String getAction() {
-		return StrUtil.isNotBlank(adviceMessage) ? adviceMessage : "check you configuration";
+		return StringUtils.isNotBlank(adviceMessage) ? adviceMessage : "check you configuration";
 	}
 
 	/**

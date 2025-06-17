@@ -1,6 +1,5 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.aliyun.oss.model.CompleteMultipartUploadRequest;
 import com.aliyun.oss.model.PartETag;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
@@ -9,6 +8,7 @@ import salthai.top.object.storage.core.domain.multipart.PartSummaryDomain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
@@ -36,12 +36,12 @@ public class ArgumentsToCompleteMultipartUploadRequestConverter extends
 	 * @return partETags
 	 */
 	static List<PartETag> getPartETags(List<PartSummaryDomain> attributes) {
-		if (CollectionUtil.isNotEmpty(attributes)) {
-			return attributes.stream()
-				.map(item -> new PartETag(item.getPartNumber(), item.getEtag()))
-				.collect(Collectors.toList());
+		if (Objects.isNull(attributes) || attributes.isEmpty()) {
+			return new ArrayList<>();
 		}
-		return new ArrayList<>();
+		return attributes.stream()
+			.map(item -> new PartETag(item.getPartNumber(), item.getEtag()))
+			.collect(Collectors.toList());
 	}
 
 }

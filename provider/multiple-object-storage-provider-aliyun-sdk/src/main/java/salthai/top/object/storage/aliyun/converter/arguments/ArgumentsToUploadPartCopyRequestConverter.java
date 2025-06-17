@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.collection.CollectionUtil;
 import com.aliyun.oss.model.UploadPartCopyRequest;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.core.arguments.multipart.UploadPartCopyArguments;
 
@@ -34,10 +34,10 @@ public class ArgumentsToUploadPartCopyRequestConverter
 		request.setSourceKey(uploadPartCopyArguments.getSourceObjectName());
 		request.setSourceVersionId(uploadPartCopyArguments.getSourceObjectVersionId());
 
-		if (CollectionUtil.isNotEmpty(uploadPartCopyArguments.getMatchingEtagConstraints())) {
+		if (ObjectUtils.isNotEmpty(uploadPartCopyArguments.getMatchingEtagConstraints())) {
 			request.setMatchingETagConstraints(uploadPartCopyArguments.getMatchingEtagConstraints());
 		}
-		if (CollectionUtil.isNotEmpty(uploadPartCopyArguments.getNonMatchingEtagConstraints())) {
+		if (ObjectUtils.isNotEmpty(uploadPartCopyArguments.getNonMatchingEtagConstraints())) {
 			request.setNonmatchingETagConstraints(uploadPartCopyArguments.getNonMatchingEtagConstraints());
 		}
 		if (Objects.nonNull(uploadPartCopyArguments.getModifiedSinceConstraint())) {

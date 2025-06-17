@@ -1,8 +1,8 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectRequest;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.core.arguments.object.PutObjectArguments;
 
@@ -24,13 +24,13 @@ public class ArgumentsToPutObjectRequestConverter
 		PutObjectRequest putObjectRequest = new PutObjectRequest(putObjectArguments.getBucketName(),
 				putObjectArguments.getObjectName(), putObjectArguments.getInputStream());
 		// fix 请求头设置错误
-		if (MapUtil.isNotEmpty(putObjectArguments.getRequestHeaders())) {
+		if (ObjectUtils.isNotEmpty(putObjectArguments.getRequestHeaders())) {
 			putObjectRequest.setHeaders(putObjectArguments.getRequestHeaders());
 		}
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(putObjectArguments.getContentType());
 		objectMetadata.setContentLength(putObjectArguments.getObjectSize());
-		if (MapUtil.isNotEmpty(putObjectArguments.getMetadata())) {
+		if (ObjectUtils.isNotEmpty(putObjectArguments.getMetadata())) {
 			putObjectArguments.getMetadata().forEach(objectMetadata::setHeader);
 		}
 		return putObjectRequest;

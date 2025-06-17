@@ -1,7 +1,6 @@
 package salthai.top.object.storage.core.arguments.multipart;
 
-import cn.hutool.core.lang.Assert;
-import cn.hutool.core.lang.Validator;
+import org.apache.commons.lang3.Validate;
 import salthai.top.object.storage.core.arguments.base.BasePartArguments;
 import salthai.top.object.storage.core.constants.StorageConstants;
 
@@ -39,7 +38,7 @@ public class UploadPartArguments extends BasePartArguments {
 	}
 
 	public void setPartNumber(int partNumber) {
-		Validator.isBetween(partNumber, StorageConstants.MIN_PART_NUMBER, StorageConstants.MAX_PART_NUMBER);
+		Validate.inclusiveBetween(StorageConstants.MIN_PART_NUMBER, StorageConstants.MAX_PART_NUMBER, partNumber);
 		this.partNumber = partNumber;
 	}
 
@@ -48,7 +47,7 @@ public class UploadPartArguments extends BasePartArguments {
 	}
 
 	public void setPartSize(long partSize) {
-		Assert.isFalse(partSize < 0, "part size must > 0");
+		Validate.isTrue(partSize > 0, "part size must > 0");
 		this.partSize = partSize;
 	}
 
