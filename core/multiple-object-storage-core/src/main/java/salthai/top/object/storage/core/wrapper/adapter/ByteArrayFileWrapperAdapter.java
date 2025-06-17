@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.wrapper.adapter;
 
-import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.core.content.ContentTypeDetect;
 import salthai.top.object.storage.core.wrapper.ByteArrayFileWrapper;
 import salthai.top.object.storage.core.wrapper.FileWrapper;
@@ -40,7 +40,7 @@ public class ByteArrayFileWrapperAdapter implements FileWrapperAdapter {
 	 */
 	@Override
 	public FileWrapper wrapper(Object source, String contentType, Long fileByteSize) throws IOException {
-		if (StrUtil.isBlank(contentType)) {
+		if (StringUtils.isBlank(contentType)) {
 			contentType = contentTypeDetect.detect((byte[]) source);
 		}
 		return new ByteArrayFileWrapper((byte[]) source, contentType);

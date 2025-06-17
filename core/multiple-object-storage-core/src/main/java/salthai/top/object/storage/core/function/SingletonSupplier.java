@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.function;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -93,7 +93,7 @@ public class SingletonSupplier<T> implements Supplier<T> {
 	 */
 	public T obtain() {
 		T instance = get();
-		Assert.state(instance != null, "No instance from Supplier");
+		Validate.isTrue(instance != null, "No instance from Supplier");
 		return instance;
 	}
 

@@ -1,10 +1,10 @@
 package salthai.top.object.storage.huawei.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
-import salthai.top.object.storage.core.arguments.multipart.InitiateMultipartUploadArguments;
-import salthai.top.object.storage.huawei.converter.ArgumentsToBaseObjectRequestConverter;
 import com.obs.services.model.InitiateMultipartUploadRequest;
 import com.obs.services.model.ObjectMetadata;
+import org.apache.commons.lang3.ObjectUtils;
+import salthai.top.object.storage.core.arguments.multipart.InitiateMultipartUploadArguments;
+import salthai.top.object.storage.huawei.converter.ArgumentsToBaseObjectRequestConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class ArgumentToInitiateMultipartUploadRequestConverter extends
 		InitiateMultipartUploadRequest request = new InitiateMultipartUploadRequest();
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(arguments.getContentType());
-		if (MapUtil.isNotEmpty(arguments.getMetadata())) {
+		if (ObjectUtils.isNotEmpty(arguments.getMetadata())) {
 			Map<String, Object> obsMetadata = new HashMap<>(arguments.getMetadata());
 			objectMetadata.setMetadata(obsMetadata);
 		}

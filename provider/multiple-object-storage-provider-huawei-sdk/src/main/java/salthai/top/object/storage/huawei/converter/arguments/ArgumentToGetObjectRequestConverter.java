@@ -1,9 +1,9 @@
 package salthai.top.object.storage.huawei.converter.arguments;
 
-import cn.hutool.core.collection.CollectionUtil;
+import com.obs.services.model.GetObjectRequest;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.core.arguments.object.GetObjectArguments;
 import salthai.top.object.storage.huawei.converter.ArgumentsToBaseObjectRequestConverter;
-import com.obs.services.model.GetObjectRequest;
 
 import java.util.Map;
 import java.util.Objects;
@@ -26,7 +26,7 @@ public class ArgumentToGetObjectRequestConverter
 		GetObjectRequest request = new GetObjectRequest();
 		request.setVersionId(arguments.getVersionId());
 		Map<String, String> extraQueryParams = arguments.getExtraQueryParams();
-		if (CollectionUtil.isNotEmpty(extraQueryParams)) {
+		if (ObjectUtils.isNotEmpty(extraQueryParams)) {
 			request.setRequestParameters(extraQueryParams);
 		}
 		if (Objects.nonNull(arguments.getModifiedSince())) {

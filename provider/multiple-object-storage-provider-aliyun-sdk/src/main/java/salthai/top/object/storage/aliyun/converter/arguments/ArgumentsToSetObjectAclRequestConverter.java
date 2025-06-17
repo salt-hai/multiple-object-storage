@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.model.SetObjectAclRequest;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.aliyun.converter.acl.OssAclConvert;
 import salthai.top.object.storage.core.arguments.object.SetObjectAclArguments;
@@ -26,7 +26,7 @@ public class ArgumentsToSetObjectAclRequestConverter
 		SetObjectAclRequest request = new SetObjectAclRequest(setObjectAclArguments.getBucketName(),
 				setObjectAclArguments.getObjectName());
 		request.setCannedACL(ACL_CONVERT.convert(setObjectAclArguments.getAcl()));
-		if (StrUtil.isNotBlank(setObjectAclArguments.getVersionId())) {
+		if (StringUtils.isNotBlank(setObjectAclArguments.getVersionId())) {
 			request.setVersionId(setObjectAclArguments.getVersionId());
 		}
 		return request;

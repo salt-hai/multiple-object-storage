@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.arguments.bucket;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 import salthai.top.object.storage.core.acl.AccessControlList;
 import salthai.top.object.storage.core.arguments.base.BucketArguments;
 
@@ -30,7 +30,7 @@ public class SetBucketAclArguments extends BucketArguments {
 	}
 
 	public void setAcl(AccessControlList acl) {
-		Assert.notNull(acl, "acl cant be null");
+		Validate.notNull(acl, "acl cant be null");
 		this.acl = acl;
 	}
 

@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.arguments.base;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 
 /**
  * 桶请求参数
@@ -24,7 +24,7 @@ public abstract class BucketArguments extends BaseArguments {
 	}
 
 	public void setBucketName(String bucketName) {
-		Assert.notBlank(bucketName, "bucket name cant be null");
+		Validate.notBlank(bucketName, "bucket name cant be null");
 		this.bucketName = bucketName;
 	}
 

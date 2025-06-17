@@ -1,10 +1,10 @@
 package salthai.top.object.storage.huawei.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
-import salthai.top.object.storage.core.arguments.object.PutObjectArguments;
-import salthai.top.object.storage.huawei.converter.ArgumentsToBaseObjectRequestConverter;
 import com.obs.services.model.ObjectMetadata;
 import com.obs.services.model.PutObjectRequest;
+import org.apache.commons.lang3.ObjectUtils;
+import salthai.top.object.storage.core.arguments.object.PutObjectArguments;
+import salthai.top.object.storage.huawei.converter.ArgumentsToBaseObjectRequestConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class ArgumentsToPutObjectRequestConverter
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(putObjectArguments.getContentType());
 		objectMetadata.setContentLength(putObjectArguments.getObjectSize());
-		if (MapUtil.isNotEmpty(putObjectArguments.getMetadata())) {
+		if (ObjectUtils.isNotEmpty(putObjectArguments.getMetadata())) {
 			Map<String, Object> mapMetadata = new HashMap<>(putObjectArguments.getMetadata());
 			objectMetadata.setMetadata(mapMetadata);
 		}

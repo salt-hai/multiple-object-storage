@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.utils;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 import salthai.top.object.storage.core.function.Converter;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class ConverterUtils {
 	 * @param <Target> 目标
 	 */
 	public static <Source, Target> Target toTarget(Source source, Converter<Source, Target> targetConverter) {
-		Assert.notNull(source, "source cant be null");
+		Validate.notNull(source, "source cant be null");
 		return targetConverter.convert(source);
 	}
 
