@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter;
 
-import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.model.GenericRequest;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.core.arguments.base.ObjectVersionArguments;
 
 /**
@@ -25,7 +25,7 @@ public class ObjectVersionArgumentsToGenericRequestConverter<Source extends Obje
 	public GenericRequest getInstance(Source source) {
 		GenericRequest genericRequest = new GenericRequest(source.getBucketName());
 		genericRequest.setKey(source.getObjectName());
-		if (StrUtil.isNotBlank(source.getVersionId())) {
+		if (StringUtils.isNotBlank(source.getVersionId())) {
 			genericRequest.setVersionId(source.getVersionId());
 		}
 		return genericRequest;

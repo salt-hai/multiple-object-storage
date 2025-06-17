@@ -27,7 +27,6 @@
 		<!-- 依赖版本 -->
 		<spring-boot.version>3.2.1</spring-boot.version>
 		<org.junit.jupiter.version>5.8.2</org.junit.jupiter.version>
-		<hutool.version>5.8.25</hutool.version>
 		<pool>2.11.1</pool>
 		<software.amazon.awssdk.version>2.20.70</software.amazon.awssdk.version>
 		<aliyun-oss.version>3.17.1</aliyun-oss.version>
@@ -51,14 +50,6 @@
 				<type>pom</type>
 			</dependency>
 			<!-- ======================= 第三方依赖 ===================== -->
-			<!-- hutool工具类 -->
-			<dependency>
-				<groupId>cn.hutool</groupId>
-				<artifactId>hutool-bom</artifactId>
-				<version>${hutool.version}</version>
-				<scope>import</scope>
-				<type>pom</type>
-			</dependency>
 			<!-- 单元测试-->
 			<dependency>
 				<groupId>org.junit</groupId>

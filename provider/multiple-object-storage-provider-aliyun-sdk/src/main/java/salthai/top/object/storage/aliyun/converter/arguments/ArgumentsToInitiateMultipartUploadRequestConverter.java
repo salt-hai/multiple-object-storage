@@ -1,8 +1,8 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
 import com.aliyun.oss.model.InitiateMultipartUploadRequest;
 import com.aliyun.oss.model.ObjectMetadata;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.core.arguments.multipart.InitiateMultipartUploadArguments;
 
@@ -25,7 +25,7 @@ public class ArgumentsToInitiateMultipartUploadRequestConverter extends
 				arguments.getObjectName());
 		ObjectMetadata objectMetadata = new ObjectMetadata();
 		objectMetadata.setContentType(arguments.getContentType());
-		if (MapUtil.isNotEmpty(arguments.getMetadata())) {
+		if (ObjectUtils.isNotEmpty(arguments.getMetadata())) {
 			arguments.getMetadata().forEach(objectMetadata::setHeader);
 		}
 		request.setObjectMetadata(objectMetadata);

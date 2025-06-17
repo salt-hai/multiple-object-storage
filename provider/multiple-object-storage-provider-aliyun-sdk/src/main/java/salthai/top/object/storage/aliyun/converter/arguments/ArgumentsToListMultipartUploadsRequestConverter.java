@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.model.ListMultipartUploadsRequest;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.core.arguments.multipart.ListMultipartUploadsArguments;
 
@@ -23,22 +23,22 @@ public class ArgumentsToListMultipartUploadsRequestConverter
 	@Override
 	public ListMultipartUploadsRequest getInstance(ListMultipartUploadsArguments arguments) {
 		ListMultipartUploadsRequest request = new ListMultipartUploadsRequest(arguments.getBucketName());
-		if (StrUtil.isNotBlank(arguments.getDelimiter())) {
+		if (StringUtils.isNotBlank(arguments.getDelimiter())) {
 			request.setDelimiter(arguments.getDelimiter());
 		}
-		if (StrUtil.isNotBlank(arguments.getPrefix())) {
+		if (StringUtils.isNotBlank(arguments.getPrefix())) {
 			request.setPrefix(arguments.getPrefix());
 		}
-		if (StrUtil.isNotBlank(arguments.getEncodingType())) {
+		if (StringUtils.isNotBlank(arguments.getEncodingType())) {
 			request.setEncodingType(arguments.getEncodingType());
 		}
-		if (StrUtil.isNotBlank(arguments.getUploadIdMarker())) {
+		if (StringUtils.isNotBlank(arguments.getUploadIdMarker())) {
 			request.setUploadIdMarker(arguments.getUploadIdMarker());
 		}
 		if (Objects.nonNull(arguments.getMaxUploads())) {
 			request.setMaxUploads(arguments.getMaxUploads());
 		}
-		if (StrUtil.isNotBlank(arguments.getKeyMarker())) {
+		if (StringUtils.isNotBlank(arguments.getKeyMarker())) {
 			request.setKeyMarker(arguments.getKeyMarker());
 		}
 		return request;

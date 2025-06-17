@@ -1,10 +1,10 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
-import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.HttpMethod;
 import com.aliyun.oss.internal.OSSHeaders;
 import com.aliyun.oss.model.GeneratePresignedUrlRequest;
+import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.core.arguments.object.GenPreSignedUrlArguments;
 import salthai.top.object.storage.core.function.Converter;
 
@@ -33,13 +33,13 @@ public class ArgumentsToGeneratePreSignedUrlRequestConverter
 		GeneratePresignedUrlRequest ossReq = new GeneratePresignedUrlRequest(arguments.getBucketName(),
 				arguments.getObjectName());
 		ossReq.setMethod(HttpMethod.valueOf(arguments.getMethod().name()));
-		if (MapUtil.isNotEmpty(arguments.getExtraHeaders())) {
+		if (ObjectUtils.isNotEmpty(arguments.getExtraHeaders())) {
 			ossReq.setHeaders(arguments.getExtraHeaders());
 		}
-		if (MapUtil.isNotEmpty(arguments.getExtraQueryParams())) {
+		if (ObjectUtils.isNotEmpty(arguments.getExtraQueryParams())) {
 			ossReq.setQueryParameter(arguments.getExtraQueryParams());
 		}
-		if (StrUtil.isNotBlank(arguments.getVersionId())) {
+		if (StringUtils.isNotBlank(arguments.getVersionId())) {
 			Map<String, String> queryParameter = ossReq.getQueryParameter();
 			queryParameter.put(OSSHeaders.OSS_VERSION_ID, arguments.getVersionId());
 			ossReq.setQueryParameter(queryParameter);

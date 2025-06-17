@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.wrapper.adapter;
 
-import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.core.content.ContentTypeDetect;
 import salthai.top.object.storage.core.wrapper.DiskFileWrapper;
 import salthai.top.object.storage.core.wrapper.FileWrapper;
@@ -50,7 +50,7 @@ public class DiskFileWrapperAdapter implements FileWrapperAdapter {
 		if (Objects.nonNull(fileByteSize)) {
 			diskFileWrapper.setByteSize(fileByteSize);
 		}
-		if (StrUtil.isBlank(contentType)) {
+		if (StringUtils.isBlank(contentType)) {
 			diskFileWrapper.setContentType(contentTypeDetect.detect(((File) source).getName()));
 		}
 		return diskFileWrapper;

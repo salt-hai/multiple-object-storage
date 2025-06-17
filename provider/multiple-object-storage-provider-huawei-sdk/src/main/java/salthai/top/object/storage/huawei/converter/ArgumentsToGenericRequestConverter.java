@@ -1,9 +1,9 @@
 package salthai.top.object.storage.huawei.converter;
 
-import cn.hutool.core.map.MapUtil;
+import com.obs.services.model.GenericRequest;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.core.arguments.base.BaseArguments;
 import salthai.top.object.storage.core.model.converter.BaseConverter;
-import com.obs.services.model.GenericRequest;
 
 import java.util.HashMap;
 
@@ -23,7 +23,7 @@ public abstract class ArgumentsToGenericRequestConverter<Source extends BaseArgu
 	@Override
 	public void prepare(Source source, Target instance) {
 		// 设置额外的请求头
-		if (MapUtil.isNotEmpty(source.getExtraHeaders())) {
+		if (ObjectUtils.isNotEmpty(source.getExtraHeaders())) {
 			HashMap<String, String> userHeaders = instance.getUserHeaders();
 			userHeaders.putAll(source.getExtraHeaders());
 			instance.setUserHeaders(userHeaders);

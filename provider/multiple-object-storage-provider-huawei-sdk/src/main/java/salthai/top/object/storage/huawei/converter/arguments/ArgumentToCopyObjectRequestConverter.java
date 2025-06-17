@@ -1,10 +1,10 @@
 package salthai.top.object.storage.huawei.converter.arguments;
 
-import cn.hutool.core.map.MapUtil;
-import salthai.top.object.storage.core.arguments.object.CopyObjectArguments;
-import salthai.top.object.storage.huawei.converter.ArgumentsToGenericRequestConverter;
 import com.obs.services.model.CopyObjectRequest;
 import com.obs.services.model.ObjectMetadata;
+import org.apache.commons.lang3.ObjectUtils;
+import salthai.top.object.storage.core.arguments.object.CopyObjectArguments;
+import salthai.top.object.storage.huawei.converter.ArgumentsToGenericRequestConverter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -29,7 +29,7 @@ public class ArgumentToCopyObjectRequestConverter
 		request.setDestinationBucketName(copyObjectArguments.getTarget().getBucketName());
 		request.setDestinationObjectKey(copyObjectArguments.getTarget().getObjectName());
 		Map<String, String> targetObjectMetadataMap = copyObjectArguments.getTarget().getObjectMetadata();
-		if (MapUtil.isNotEmpty(targetObjectMetadataMap)) {
+		if (ObjectUtils.isNotEmpty(targetObjectMetadataMap)) {
 			// 目标对象元数据
 			ObjectMetadata targetObjectMetadata = new ObjectMetadata();
 			Map<String, Object> mapMetadata = new HashMap<>(targetObjectMetadataMap);

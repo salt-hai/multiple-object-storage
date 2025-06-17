@@ -16,7 +16,7 @@
 
 package salthai.top.object.storage.core.unit;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 
 import java.io.Serializable;
 import java.util.regex.Matcher;
@@ -199,7 +199,7 @@ public class DataSize implements Comparable<DataSize>, Serializable {
 	public static DataSize parse(CharSequence text, DataUnit defaultUnit) {
 		try {
 			Matcher matcher = PATTERN.matcher(text);
-			Assert.state(matcher.matches(), "Does not match data size pattern");
+			Validate.isTrue(matcher.matches(), "Does not match data size pattern");
 			DataUnit unit = determineDataUnit(matcher.group(2), defaultUnit);
 			long amount = Long.parseLong(matcher.group(1));
 			return DataSize.of(amount, unit);

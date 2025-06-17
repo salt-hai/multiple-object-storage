@@ -1,7 +1,7 @@
 package salthai.top.object.storage.baidu.converter.arguments;
 
-import cn.hutool.core.util.StrUtil;
 import com.baidubce.services.bos.model.ListObjectsRequest;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.baidu.converter.ArgumentsToGenericBucketRequestConverter;
 import salthai.top.object.storage.core.arguments.object.ListObjectsArguments;
 
@@ -23,13 +23,13 @@ public class ArgumentsToListObjectsRequestConverter
 	@Override
 	public ListObjectsRequest getInstance(ListObjectsArguments arguments) {
 		ListObjectsRequest request = new ListObjectsRequest(arguments.getBucketName());
-		if (StrUtil.isNotBlank(arguments.getPrefix())) {
+		if (StringUtils.isNotBlank(arguments.getPrefix())) {
 			request.setPrefix(arguments.getPrefix());
 		}
-		if (StrUtil.isNotBlank(arguments.getMarker())) {
+		if (StringUtils.isNotBlank(arguments.getMarker())) {
 			request.setMarker(arguments.getMarker());
 		}
-		if (StrUtil.isNotBlank(arguments.getDelimiter())) {
+		if (StringUtils.isNotBlank(arguments.getDelimiter())) {
 			request.setDelimiter(arguments.getDelimiter());
 		}
 		if (Objects.nonNull(arguments.getMaxKeys())) {

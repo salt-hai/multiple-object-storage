@@ -1,14 +1,15 @@
 package salthai.top.object.storage.core.wrapper.adapter;
 
-import cn.hutool.core.io.IoUtil;
-import cn.hutool.core.util.StrUtil;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import salthai.top.object.storage.core.content.ContentTypeDetect;
 import salthai.top.object.storage.core.unit.DataSize;
 import salthai.top.object.storage.core.wrapper.FileWrapper;
 import salthai.top.object.storage.core.wrapper.InputStreamWrapper;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Objects;
@@ -20,7 +21,7 @@ import java.util.Objects;
  */
 public class InputStreamWrapperAdapter implements FileWrapperAdapter {
 
-	private static final Logger log = LoggerFactory.getLogger(InputStreamWrapper.class);
+	private static final Logger log = LoggerFactory.getLogger(InputStreamWrapperAdapter.class);
 
 	private final ContentTypeDetect contentTypeDetect;
 
@@ -53,13 +54,17 @@ public class InputStreamWrapperAdapter implements FileWrapperAdapter {
 			fileByteSize = -1L;
 		}
 		// 不需要确认流文件具体的 媒体类型
-		if (StrUtil.isNotBlank(contentType)) {
+		if (StringUtils.isNotBlank(contentType)) {
 			return new InputStreamWrapper((InputStream) source, contentType, fileByteSize);
 		}
+		Validate.notNull(source, "source is null");
+		InputStream target;
 		// 转为支持标记的流 以供确认 媒体类型时二次使用
-		InputStream target = IoUtil.toMarkSupportStream((InputStream) source);
-		if (!target.markSupported()) {
-			throw new IOException("cant not convert to mark support stream");
+		if (((InputStream) source).markSupported()) {
+			target = (InputStream) source;
+		}
+		else {
+			target = new BufferedInputStream((InputStream) source);
 		}
 		try {
 			target.mark((int) DataSize.ofKilobytes(64).toBytes());

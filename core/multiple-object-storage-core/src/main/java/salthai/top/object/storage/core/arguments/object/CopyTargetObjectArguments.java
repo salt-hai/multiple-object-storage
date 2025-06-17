@@ -1,6 +1,6 @@
 package salthai.top.object.storage.core.arguments.object;
 
-import cn.hutool.core.lang.Assert;
+import org.apache.commons.lang3.Validate;
 import salthai.top.object.storage.core.model.arguments.ObjectStorageArguments;
 
 import java.util.Map;
@@ -42,7 +42,7 @@ public class CopyTargetObjectArguments implements ObjectStorageArguments {
 	}
 
 	public void setBucketName(String bucketName) {
-		Assert.notBlank(bucketName, "bucket name cant be null or empty");
+		Validate.notBlank(bucketName, "bucket name cant be null or empty");
 		this.bucketName = bucketName;
 	}
 
@@ -51,7 +51,7 @@ public class CopyTargetObjectArguments implements ObjectStorageArguments {
 	}
 
 	public void setObjectName(String objectName) {
-		Assert.notBlank(objectName, "object name cant be null or empty");
+		Validate.notBlank(objectName, "object name cant be null or empty");
 		this.objectName = objectName;
 	}
 

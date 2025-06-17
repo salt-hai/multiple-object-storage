@@ -1,10 +1,10 @@
 package salthai.top.object.storage.core;
 
-import cn.hutool.core.util.ServiceLoaderUtil;
 import salthai.top.object.storage.core.content.ContentTypeDetect;
 import salthai.top.object.storage.core.content.TikaContentTypeDetect;
 import salthai.top.object.storage.core.exceptions.FileWrapperException;
 import salthai.top.object.storage.core.function.OrderComparator;
+import salthai.top.object.storage.core.utils.ServiceLoaderUtil;
 import salthai.top.object.storage.core.wrapper.FileWrapper;
 import salthai.top.object.storage.core.wrapper.adapter.ByteArrayFileWrapperAdapter;
 import salthai.top.object.storage.core.wrapper.adapter.DiskFileWrapperAdapter;

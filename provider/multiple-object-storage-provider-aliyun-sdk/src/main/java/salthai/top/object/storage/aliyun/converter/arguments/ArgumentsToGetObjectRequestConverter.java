@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter.arguments;
 
-import cn.hutool.core.util.StrUtil;
 import com.aliyun.oss.model.GetObjectRequest;
+import org.apache.commons.lang3.StringUtils;
 import salthai.top.object.storage.aliyun.converter.BaseArgumentsToWebServiceRequestConverter;
 import salthai.top.object.storage.core.arguments.object.GetObjectArguments;
 
@@ -23,7 +23,7 @@ public class ArgumentsToGetObjectRequestConverter
 	@Override
 	public GetObjectRequest getInstance(GetObjectArguments arguments) {
 		GetObjectRequest request = new GetObjectRequest(arguments.getBucketName(), arguments.getObjectName());
-		if (StrUtil.isNotBlank(arguments.getVersionId())) {
+		if (StringUtils.isNotBlank(arguments.getVersionId())) {
 			request.setVersionId(arguments.getVersionId());
 		}
 		if (Objects.nonNull(arguments.getModifiedSince())) {

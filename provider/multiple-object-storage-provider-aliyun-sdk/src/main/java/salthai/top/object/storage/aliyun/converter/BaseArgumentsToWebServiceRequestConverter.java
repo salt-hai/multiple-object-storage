@@ -1,7 +1,7 @@
 package salthai.top.object.storage.aliyun.converter;
 
-import cn.hutool.core.map.MapUtil;
 import com.aliyun.oss.model.WebServiceRequest;
+import org.apache.commons.lang3.ObjectUtils;
 import salthai.top.object.storage.core.arguments.base.BaseArguments;
 import salthai.top.object.storage.core.model.converter.BaseConverter;
 
@@ -20,10 +20,10 @@ public abstract class BaseArgumentsToWebServiceRequestConverter<Source extends B
 	 */
 	@Override
 	public void prepare(Source source, Target instance) {
-		if (MapUtil.isNotEmpty(source.getExtraHeaders())) {
+		if (ObjectUtils.isNotEmpty(source.getExtraHeaders())) {
 			source.getExtraHeaders().forEach(instance::addHeader);
 		}
-		if (MapUtil.isNotEmpty(source.getExtraQueryParams())) {
+		if (ObjectUtils.isNotEmpty(source.getExtraQueryParams())) {
 			source.getExtraQueryParams().forEach(instance::addParameter);
 		}
 	}
