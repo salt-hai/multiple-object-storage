@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import salthai.top.object.storage.amazon.BaseS3Operations;
 import salthai.top.object.storage.amazon.S3Constants;
 import salthai.top.object.storage.amazon.client.S3ClientPackage;
+import salthai.top.object.storage.amazon.converter.argument.ArgumentsToHeadObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToUploadRequestConverter;
+import salthai.top.object.storage.amazon.converter.domain.HeadObjectResponseToMetadataDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.PutObjectResponseToDomainConverter;
 import salthai.top.object.storage.core.arguments.object.CopyObjectArguments;
 import salthai.top.object.storage.core.arguments.object.DelObjectArguments;
@@ -22,17 +24,23 @@ import salthai.top.object.storage.core.domain.object.GetObjectDomain;
 import salthai.top.object.storage.core.domain.object.ListObjectsDomain;
 import salthai.top.object.storage.core.domain.object.ObjectMetadataDomain;
 import salthai.top.object.storage.core.domain.object.PutObjectDomain;
+import salthai.top.object.storage.core.exceptions.GetFileException;
 import salthai.top.object.storage.core.exceptions.ObjectStorageException;
 import salthai.top.object.storage.core.exceptions.PutFileException;
 import salthai.top.object.storage.core.operations.ObjectOperations;
 import salthai.top.object.storage.core.provider.ProviderClientManager;
 import salthai.top.object.storage.core.utils.ConverterUtils;
+import software.amazon.awssdk.services.s3.model.GetObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
+import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
 import software.amazon.awssdk.transfer.s3.model.CompletedUpload;
 import software.amazon.awssdk.transfer.s3.model.Upload;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
+import java.util.function.Function;
 
 /**
  * s3实现对象操作
@@ -88,7 +96,21 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public boolean doesObjectExist(DoesObjectExistArguments doesObjectExistArguments) throws ObjectStorageException {
-		return false;
+		return execute(s3ClientPackage -> {
+			HeadObjectRequest request = HeadObjectRequest.builder()
+				.bucket(doesObjectExistArguments.getBucketName())
+				.key(doesObjectExistArguments.getObjectName())
+				.versionId(doesObjectExistArguments.getVersionId())
+				.build();
+			try {
+				HeadObjectResponse headObjectResponse = s3ClientPackage.getS3Client().headObject(request);
+				return Objects.nonNull(headObjectResponse);
+			}
+			catch (UnsupportedOperationException e) {
+				log.error("==> {} s3 doesObjectExist error:", LOG_PREFIX, e);
+				return false;
+			}
+		});
 	}
 
 	/**
@@ -98,7 +120,22 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public ObjectMetadataDomain getObjectMetadata(GetObjectMetadataArguments arguments) {
-		return null;
+		return execute(s3ClientPackage -> {
+			try {
+				HeadObjectResponse headObjectResponse = s3ClientPackage.getS3Client()
+					.headObject(ConverterUtils.toTarget(arguments, new ArgumentsToHeadObjectRequestConverter()));
+				ObjectMetadataDomain domain = ConverterUtils.toTarget(headObjectResponse,
+						new HeadObjectResponseToMetadataDomainConverter());
+				domain.setRegion(arguments.getRegion());
+				domain.setBucketName(arguments.getBucketName());
+				domain.setObjectName(arguments.getObjectName());
+				return domain;
+			}
+			catch (UnsupportedOperationException e) {
+				log.error("==>  {} s3 get object metadata error: ", LOG_PREFIX, e);
+				throw new GetFileException(e);
+			}
+		});
 	}
 
 	/**
@@ -108,7 +145,14 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public GetObjectDomain getObject(GetObjectArguments arguments) {
-		return null;
+		return execute(new Function<S3ClientPackage, GetObjectDomain>() {
+			@Override
+			public GetObjectDomain apply(S3ClientPackage s3ClientPackage) {
+
+				s3ClientPackage.getS3Client().getObject(GetObjectRequest.builder().build());
+				return null;
+			}
+		});
 	}
 
 	/**
