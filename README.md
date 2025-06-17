@@ -20,15 +20,11 @@
 
 项目相应依赖暂未推送中央仓库,需要自行克隆代码,本地编译
 
-### **多个服务商聚合使用**
-
-聚合使用可以支持多个不同的云服务商进行切换,按照项目导入的依赖或导入多个实现依赖后指定想要的服务商,系统会更具配置文件或依赖项目进行自动配置
-
-首先项目pom文件引入:
+### **Bom文件**
 
 引入bom依赖进行管理,spring-boot 3.0 以下使用版本号3.0以下的最新版本即可
 
-``` xml
+```xml
 <dependencyManagement>
      <dependencies>
         <dependency>
@@ -41,6 +37,10 @@
     </dependencies>
 </dependencyManagement>
 ```
+
+### **多个服务商聚合使用**
+
+聚合使用可以支持多个不同的云服务商进行切换,按照项目导入的依赖或导入多个实现依赖后指定想要的服务商,系统会更具配置文件或依赖项目进行自动配置
 
 依赖坐标
 
@@ -67,19 +67,6 @@
             <groupId>salthai.top</groupId>
             <artifactId>multiple-object-storage-provider-baidu-sdk</artifactId>
         </dependency>
-		<!--单独使用的的starter-->
-        <dependency>
-	       <groupId>salthai.top</groupId>
-		   <artifactId>multiple-object-storage-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-		    <groupId>salthai.top</groupId>
-			<artifactId>multiple-object-storage-oss-spring-boot-starter</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>salthai.top</groupId>
-			<artifactId>multiple-object-storage-obs-spring-boot-starter</artifactId>
-	    </dependency>
 ```
 
 ### 多个服务商配置文件
@@ -121,9 +108,21 @@ multiple:
 依赖坐标
 
 ``` xml
+<!--oss--->
 <dependency>
 	<groupId>salthai.top</groupId>
 	<artifactId>multiple-object-storage-oss-spring-boot-starter</artifactId>
+</dependency>
+<!--其他starter-->
+<!--obs-->
+<dependency>
+	<groupId>salthai.top</groupId>
+	<artifactId>multiple-object-storage-obs-spring-boot-starter</artifactId>
+</dependency>
+<!--bos-->
+<dependency>
+	<groupId>salthai.top</groupId>
+	<artifactId>multiple-object-storage-bos-spring-boot-starter</artifactId>
 </dependency>
 ```
 
