@@ -5,8 +5,10 @@ import org.slf4j.LoggerFactory;
 import salthai.top.object.storage.amazon.BaseS3Operations;
 import salthai.top.object.storage.amazon.S3Constants;
 import salthai.top.object.storage.amazon.client.S3ClientPackage;
+import salthai.top.object.storage.amazon.converter.argument.ArgumentsToGetObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToHeadObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToUploadRequestConverter;
+import salthai.top.object.storage.amazon.converter.domain.GetObjectResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.HeadObjectResponseToMetadataDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.PutObjectResponseToDomainConverter;
 import salthai.top.object.storage.core.arguments.object.CopyObjectArguments;
@@ -34,6 +36,8 @@ import software.amazon.awssdk.services.s3.model.GetObjectRequest;
 import software.amazon.awssdk.services.s3.model.HeadObjectRequest;
 import software.amazon.awssdk.services.s3.model.HeadObjectResponse;
 import software.amazon.awssdk.services.s3.model.PutObjectResponse;
+import software.amazon.awssdk.services.s3.model.ResponseBytes;
+import software.amazon.awssdk.services.s3.model.GetObjectResponse as S3GetObjectResponse;
 import software.amazon.awssdk.transfer.s3.model.CompletedUpload;
 import software.amazon.awssdk.transfer.s3.model.Upload;
 
@@ -145,12 +149,19 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public GetObjectDomain getObject(GetObjectArguments arguments) {
-		return execute(new Function<S3ClientPackage, GetObjectDomain>() {
-			@Override
-			public GetObjectDomain apply(S3ClientPackage s3ClientPackage) {
-
-				s3ClientPackage.getS3Client().getObject(GetObjectRequest.builder().build());
-				return null;
+		return execute(s3ClientPackage -> {
+			try {
+				software.amazon.awssdk.services.s3.model.GetObjectRequest request = ConverterUtils.toTarget(arguments,
+						new ArgumentsToGetObjectRequestConverter());
+				ResponseBytes<S3GetObjectResponse> response = s3ClientPackage.getS3Client().getObjectAsBytes(request);
+				GetObjectDomain domain = ConverterUtils.toTarget(response, new GetObjectResponseToDomainConverter());
+				domain.setBucketName(arguments.getBucketName());
+				domain.setObjectName(arguments.getObjectName());
+				return domain;
+			}
+			catch (UnsupportedOperationException e) {
+				log.error("==> {} s3 get object error: ", LOG_PREFIX, e);
+				throw new GetFileException(e);
 			}
 		});
 	}
