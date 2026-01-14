@@ -9,11 +9,13 @@ import salthai.top.object.storage.amazon.converter.argument.ArgumentsToDeleteObj
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToDeleteObjectsRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToGetObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToHeadObjectRequestConverter;
+import salthai.top.object.storage.amazon.converter.argument.ArgumentsToListObjectsV2RequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToUploadRequestConverter;
 import salthai.top.object.storage.amazon.converter.domain.DeleteObjectResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.DeleteObjectsResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.GetObjectResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.HeadObjectResponseToMetadataDomainConverter;
+import salthai.top.object.storage.amazon.converter.domain.ListObjectsV2ResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.PutObjectResponseToDomainConverter;
 import salthai.top.object.storage.core.arguments.object.CopyObjectArguments;
 import salthai.top.object.storage.core.arguments.object.DelObjectArguments;
@@ -178,7 +180,22 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public ListObjectsDomain listObjects(ListObjectsArguments arguments) {
-		return null;
+		return execute(s3ClientPackage -> {
+			try {
+				software.amazon.awssdk.services.s3.model.ListObjectsV2Request request = ConverterUtils.toTarget(arguments,
+						new ArgumentsToListObjectsV2RequestConverter());
+				software.amazon.awssdk.services.s3.model.ListObjectsV2Response response = s3ClientPackage.getS3Client()
+					.listObjectsV2(request);
+				ListObjectsDomain domain = ConverterUtils.toTarget(response, new ListObjectsV2ResponseToDomainConverter());
+				domain.setRegion(arguments.getRegion());
+				domain.setBucketName(arguments.getBucketName());
+				return domain;
+			}
+			catch (Exception e) {
+				log.error("==> {} s3 list objects error: ", LOG_PREFIX, e);
+				throw new UnsupportedOperationException(e);
+			}
+		});
 	}
 
 	/**
