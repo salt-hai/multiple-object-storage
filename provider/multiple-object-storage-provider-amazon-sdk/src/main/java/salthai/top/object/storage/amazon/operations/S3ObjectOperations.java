@@ -5,9 +5,13 @@ import org.slf4j.LoggerFactory;
 import salthai.top.object.storage.amazon.BaseS3Operations;
 import salthai.top.object.storage.amazon.S3Constants;
 import salthai.top.object.storage.amazon.client.S3ClientPackage;
+import salthai.top.object.storage.amazon.converter.argument.ArgumentsToDeleteObjectRequestConverter;
+import salthai.top.object.storage.amazon.converter.argument.ArgumentsToDeleteObjectsRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToGetObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToHeadObjectRequestConverter;
 import salthai.top.object.storage.amazon.converter.argument.ArgumentsToUploadRequestConverter;
+import salthai.top.object.storage.amazon.converter.domain.DeleteObjectResponseToDomainConverter;
+import salthai.top.object.storage.amazon.converter.domain.DeleteObjectsResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.GetObjectResponseToDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.HeadObjectResponseToMetadataDomainConverter;
 import salthai.top.object.storage.amazon.converter.domain.PutObjectResponseToDomainConverter;
@@ -21,6 +25,7 @@ import salthai.top.object.storage.core.arguments.object.GetObjectMetadataArgumen
 import salthai.top.object.storage.core.arguments.object.ListObjectsArguments;
 import salthai.top.object.storage.core.arguments.object.PutObjectArguments;
 import salthai.top.object.storage.core.arguments.object.SetObjectAclArguments;
+import salthai.top.object.storage.core.exceptions.DelFileException;
 import salthai.top.object.storage.core.domain.object.DelObjectDomain;
 import salthai.top.object.storage.core.domain.object.GetObjectDomain;
 import salthai.top.object.storage.core.domain.object.ListObjectsDomain;
@@ -184,7 +189,18 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public boolean delObject(DelObjectArguments delObjectArguments) throws ObjectStorageException {
-		return false;
+		return execute(s3ClientPackage -> {
+			try {
+				software.amazon.awssdk.services.s3.model.DeleteObjectRequest request = ConverterUtils.toTarget(
+						delObjectArguments, new ArgumentsToDeleteObjectRequestConverter());
+				s3ClientPackage.getS3Client().deleteObject(request);
+				return true;
+			}
+			catch (Exception e) {
+				log.error("==> {} s3 delete object error: ", LOG_PREFIX, e);
+				throw new DelFileException(e);
+			}
+		});
 	}
 
 	/**
@@ -195,7 +211,19 @@ public class S3ObjectOperations extends BaseS3Operations implements ObjectOperat
 	 */
 	@Override
 	public List<DelObjectDomain> delObjects(DelObjectsArguments delObjectsArguments) throws ObjectStorageException {
-		return Collections.emptyList();
+		return execute(s3ClientPackage -> {
+			try {
+				software.amazon.awssdk.services.s3.model.DeleteObjectsRequest request = ConverterUtils.toTarget(
+						delObjectsArguments, new ArgumentsToDeleteObjectsRequestConverter());
+				software.amazon.awssdk.services.s3.model.DeleteObjectsResponse response = s3ClientPackage.getS3Client()
+					.deleteObjects(request);
+				return ConverterUtils.toTarget(response, new DeleteObjectsResponseToDomainConverter());
+			}
+			catch (Exception e) {
+				log.error("==> {} s3 delete objects error: ", LOG_PREFIX, e);
+				throw new DelFileException(e);
+			}
+		});
 	}
 
 	/**
