@@ -20,9 +20,9 @@ public enum Provider {
 	 */
 	BaiDu,
 
-	// /**
-	// * aws s3
-	// */
-	// AMAZON;
+	/**
+	 * aws s3
+	 */
+	AMAZON;
 
 }

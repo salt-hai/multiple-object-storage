@@ -33,6 +33,7 @@
 		<module>starter/multiple-object-storage-oss-spring-boot-starter</module>
 		<module>starter/multiple-object-storage-obs-spring-boot-starter</module>
 		<module>starter/multiple-object-storage-bos-spring-boot-starter</module>
+		<module>starter/multiple-object-storage-s3-spring-boot-starter</module>
 	</modules>
 
 	<properties>

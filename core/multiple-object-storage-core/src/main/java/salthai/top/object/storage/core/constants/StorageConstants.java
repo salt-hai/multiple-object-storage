@@ -51,4 +51,9 @@ public class StorageConstants {
 	 */
 	public static final String BAI_DU_PROVIDER = PROPERTY_PREFIX + ".baidu";
 
+	/**
+	 * aws s3
+	 */
+	public static final String AMAZON_PROVIDER = PROPERTY_PREFIX + ".amazon";
+
 }

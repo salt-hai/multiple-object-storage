@@ -67,6 +67,11 @@
             <groupId>salthai.top</groupId>
             <artifactId>multiple-object-storage-provider-baidu-sdk</artifactId>
         </dependency>
+        <!--aws s3-->
+        <dependency>
+            <groupId>salthai.top</groupId>
+            <artifactId>multiple-object-storage-provider-amazon-sdk</artifactId>
+        </dependency>
 ```
 
 ### 多个服务商配置文件
@@ -99,6 +104,11 @@ multiple:
         secret-key: bos-ak
         access-key: bs-sk
         endpoint: bos-接入点
+      amazon:
+        secret-key: aws-secret-key
+        access-key: aws-access-key
+        endpoint: https://s3.amazonaws.com
+        region: us-east-1
 ```
 
 ### **单独使用某个服务商**
@@ -124,16 +134,23 @@ multiple:
 	<groupId>salthai.top</groupId>
 	<artifactId>multiple-object-storage-bos-spring-boot-starter</artifactId>
 </dependency>
+<!--aws s3-->
+<dependency>
+	<groupId>salthai.top</groupId>
+	<artifactId>multiple-object-storage-s3-spring-boot-starter</artifactId>
+</dependency>
 ```
 
 ### 单独服务商配置文件
+
+**阿里云 OSS 配置示例：**
 
 ```yaml
 multiple:
   object:
     storage:
       pool:
-        # 使用对象池管理供应商客户端,如果 “commons-pool2” 可用，则自动启用。也可禁用对象池,禁用时供应商客户端使用单例管理
+        # 使用对象池管理供应商客户端,如果 "commons-pool2" 可用，则自动启用。也可禁用对象池,禁用时供应商客户端使用单例管理
         enabled: true
         max-idle: 8
         min-idle: 0
@@ -147,6 +164,36 @@ multiple:
         access-key: oss-ak
         endpoint: oss-接入点
 ```
+
+**AWS S3 配置示例：**
+
+```yaml
+multiple:
+  object:
+    storage:
+      pool:
+        enabled: true
+        max-idle: 8
+        min-idle: 0
+        max-active: 8
+        max-wait: -1ms
+        time-between-eviction-runs: -1ms
+      enable: true
+      # 启用路径样式访问（适用于自定义 S3 兼容服务）
+      path-style-access-enabled: false
+      amazon:
+        secret-key: your-secret-key
+        access-key: your-access-key
+        endpoint: https://s3.amazonaws.com
+        region: us-east-1
+```
+
+**注意：** AWS S3 支持通过 `path-style-access-enabled` 配置来切换访问方式：
+- `false`（默认）：使用虚拟主机样式访问（`https://bucket-name.s3.amazonaws.com`）
+- `true`：使用路径样式访问（`https://s3.amazonaws.com/bucket-name`）
+
+路径样式访问对于使用 S3 协议的其他云存储服务（如 MinIO、Ceph RADOS Gateway 等）非常重要。
+
 
 ### 调用Api进行操作:
 

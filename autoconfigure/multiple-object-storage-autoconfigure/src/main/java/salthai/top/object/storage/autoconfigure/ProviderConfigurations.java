@@ -1,5 +1,6 @@
 package salthai.top.object.storage.autoconfigure;
 
+import salthai.top.object.storage.autoconfigure.amazon.S3Configuration;
 import salthai.top.object.storage.autoconfigure.bos.BosConfiguration;
 import salthai.top.object.storage.autoconfigure.obs.ObsConfiguration;
 import salthai.top.object.storage.autoconfigure.oss.OssConfiguration;
@@ -23,6 +24,7 @@ final class ProviderConfigurations {
 		mappings.put(Provider.ALIYUN, OssConfiguration.class.getName());
 		mappings.put(Provider.HUAWEI, ObsConfiguration.class.getName());
 		mappings.put(Provider.BaiDu, BosConfiguration.class.getName());
+		mappings.put(Provider.AMAZON, S3Configuration.class.getName());
 		MAPPINGS = Collections.unmodifiableMap(mappings);
 	}
 
